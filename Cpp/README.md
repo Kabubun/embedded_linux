@@ -29,5 +29,9 @@ make -j4
 ```
 scp blink pi@raspberrypi.local:/home/pi/
 ssh pi@raspberrypi.local
-./blink
+sudo ./blink
+
+# もしinitInitialise: Can't lock /var/run/pigpio.pidが出たら
+sudo killall -9 pigpiod
+sudo rm /var/run/pigpio.pid
 ```

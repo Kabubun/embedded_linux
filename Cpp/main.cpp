@@ -5,7 +5,9 @@
 #include <string>
 #include <sstream>
 #include <iomanip>
-
+#ifdef RASPI
+#include "pigpio.h"
+#endif
 typedef void (*Func)();
 
 class Blink {
@@ -65,10 +67,20 @@ std::string getTimeStamp()
     return ss.str();
 }
 
+#ifdef RASPI
+constexpr unsigned ON = 1;
+constexpr unsigned OFF = 0;
+constexpr unsigned PIN = 17;
+void OnFunc() { gpioWrite(PIN, ON); };
+void OffFunc() { gpioWrite(PIN, OFF); };
+#else
 void OnFunc() { std::cout << getTimeStamp() <<":LED ON" << std::endl; };
 void OffFunc() { std::cout << getTimeStamp() << ":LED OFF" << std::endl; };
-
+#endif
 int main(void) {
+#ifdef RASPI
+  gpioInitialise();
+#endif
   std::unique_ptr<Blink> blink;
   Func on_func = OnFunc;
   Func off_func = OffFunc;
