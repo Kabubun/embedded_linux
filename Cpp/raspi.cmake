@@ -1,7 +1,7 @@
 set(ARM_COMPILE_OPTION "-mcpu=cortex-a7 -mfpu=neon-vfpv4 -mfloat-abi=hard")
 set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} ${ARM_COMPILE_OPTION}")
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${ARM_COMPILE_OPTION}")
-
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${ARM_COMPILE_OPTION} -DRASPI")
+set(RASPI 1)
 # cross compiler settings
 set(CMAKE_CROSSCOMPILING TRUE)
 set(CROSS_COMPILE "arm-linux-gnueabihf-")
